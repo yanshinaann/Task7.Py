@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <title>Flask</title>
+</head>
+<body>
+<form action="http://localhost:5000/upload" method="POST"
+      enctype="multipart/form-data">
+    <input type="file" name="file"/>
+    <input type="submit" id="retrieve"/>
+</form>
+<textarea id='textArea'>
+    </textarea>
+</body>
+<script>
+    $(document).ready(function () {
+        $('#retrieve').click(function () {
+            $.ajax({
+                url: "/upload",
+                data: $("#submit").serialize(),
+                type: "GET",
+                success: function (response) {
+                    $("#textArea").attr('val', response);
+                },
+                error: function (xhr) {
+                    //Do Something to handle error
+                }
+            });
+        });
+    });
+</script>
+</html>
